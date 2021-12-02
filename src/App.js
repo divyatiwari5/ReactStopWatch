@@ -6,12 +6,18 @@ function App() {
   const [timer, setTimer] = useState(0);
   const [time, setTime] = useState(0);
   const [isStart, setStart] = useState(false);
+  const [isComplete, setCompletion] = useState(true);
+
+  useEffect(() => {
+    if (!isComplete) {
+      reset()
+    }
+  }, [timer])
 
   useEffect(() => {
     let interval=null;
     if (isStart) {
       interval = setInterval(() => {
-        console.log({time})
         if(time > 0) {
           setTime(time => time-1)
         } else {
@@ -24,27 +30,49 @@ function App() {
   }, [isStart, time])
 
   function start() {
-    setTime(timer);
-    toggle();
+    if (timer > 0) {
+      setTime(timer);
+      setCompletion(false);
+      toggle();
+    }
+   
   }
 
   function toggle() {
-    setStart(!isStart);
+    if (time === 0 && isStart) {
+      reset();
+    } else {
+      setStart(!isStart);
+    }
   }
 
   function reset() {
     setTimer(0);
     setStart(false);
     setTime(0);
+    setCompletion(true);
+  }
+
+  function getButtonText() {
+    if (time === 0) {
+      return 'Play Again';
+    } else if (isStart) {
+      return 'Stop';
+    } else {
+      return 'Resume'
+    }
   }
 
   return (
     <div className="App">
-      <p>{time}</p>
-      <input value={timer} onChange={(e) => setTimer(e.target.value)}/>
-      <button onClick={start}>Start</button>
-      <button onClick={toggle}>{isStart ? 'Stop' : 'Resume'}</button>
-      <button onClick={reset}>Reset</button>
+      <p className="timer">{time}</p>
+      <input type="number" value={timer} onChange={(e) => setTimer(e.target.value)} className="input" placeholder="Enter timer"/>
+      <div className="btns">
+        <button onClick={start} className={isComplete ? 'btn start': 'btn hidden'}>Start</button>
+        <button onClick={toggle} className={isComplete ? 'btn hidden' : 'btn resume'}>{getButtonText()}</button>
+        <button onClick={reset} className={isComplete ? 'btn hidden' : 'btn'}>Reset</button>
+      </div>
+      
     </div>
   );
 }

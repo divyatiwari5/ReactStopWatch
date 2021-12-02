@@ -1,5 +1,48 @@
 .App {
   text-align: center;
+  & > .timer {
+    font-size: 50px;
+  }
+  & > .input {
+    border: none;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 25px;
+    outline: none;
+  }
+  & > .btns {
+    margin-top: 30px;
+    & > .btn {
+      padding: 10px 30px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      &.disabled {
+        background-color: #efefef;
+        color: #4d4d4f;
+        cursor: auto;
+      }
+      &.start {
+        background: lightgreen;
+      }
+      &.resume {
+        background-color: red;
+        color: white;
+      }
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .App-logo {
