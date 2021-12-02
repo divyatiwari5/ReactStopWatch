@@ -1,7 +1,23 @@
 .App {
   text-align: center;
+  margin-top: 4em;
   & > .timer {
     font-size: 50px;
+    border: 2px solid;
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    background: black;
+    color: white;
+    & > .unit {
+      line-height: 0;
+      font-size: 16px;
+    }
   }
   & > .input {
     border: none;
@@ -9,6 +25,7 @@
     text-align: center;
     font-size: 25px;
     outline: none;
+    margin-top: 3em;
   }
   & > .btns {
     margin-top: 30px;
@@ -33,6 +50,33 @@
         display: none;
       }
     }
+  }
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: black;
+  fill: none;
+  animation: countdown 10s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 113px;
+  }
+  to {
+    stroke-dashoffset: 0px;
   }
 }
 

@@ -76,9 +76,14 @@ function App() {
     }
   }
 
+  // TODO: Add countdown timer with SVG Circle
+
   return (
     <div className="App">
-      <p className="timer">{time}</p>
+      <div className="timer">
+        {time}
+        <p className="unit">sec</p>
+      </div>
       <input type="number" value={timer} onChange={(e) => setTimer(e.target.value)} className="input" placeholder="Enter timer"/>
       <div className="btns">
         <button onClick={start} className={isComplete ? 'btn start': 'btn hidden'}>Start</button>
