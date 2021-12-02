@@ -29,6 +29,9 @@ function App() {
     return () => clearInterval(interval)
   }, [isStart, time])
 
+  /**
+   * Start timer
+   */
   function start() {
     if (timer > 0) {
       setTime(timer);
@@ -38,6 +41,9 @@ function App() {
    
   }
 
+  /**
+   * Play and pause timer 
+   */
   function toggle() {
     if (time === 0 && isStart) {
       reset();
@@ -46,6 +52,9 @@ function App() {
     }
   }
 
+  /**
+   * Resets timer
+   */
   function reset() {
     setTimer(0);
     setStart(false);
@@ -53,6 +62,10 @@ function App() {
     setCompletion(true);
   }
 
+  /**
+   * Calculates button text on the basis of timer condition
+   * @returns button text
+   */
   function getButtonText() {
     if (time === 0) {
       return 'Play Again';
