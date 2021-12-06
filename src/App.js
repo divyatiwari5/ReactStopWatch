@@ -9,12 +9,6 @@ function App() {
   const [isComplete, setCompletion] = useState(true);
 
   useEffect(() => {
-    if (!isComplete) {
-      reset()
-    }
-  }, [timer])
-
-  useEffect(() => {
     let interval=null;
     if (isStart) {
       interval = setInterval(() => {
@@ -76,6 +70,17 @@ function App() {
     }
   }
 
+  /**
+   * Set timer on input change and resets the game if the game is not yet finished
+   * @param {*} e event
+   */
+  const onChange = (e) => {
+    setTimer(e.target.value);
+    if (!isComplete) {
+      reset();
+    }
+  }
+
   // TODO: Add countdown timer with SVG Circle
 
   return (
@@ -84,7 +89,7 @@ function App() {
         {time}
         <p className="unit">sec</p>
       </div>
-      <input type="number" value={timer} onChange={(e) => setTimer(e.target.value)} className="input" placeholder="Enter timer"/>
+      <input type="number" value={timer} onChange={(e) => onChange(e)} className="input" placeholder="Enter timer"/>
       <div className="btns">
         <button onClick={start} className={isComplete ? 'btn start': 'btn hidden'}>Start</button>
         <button onClick={toggle} className={isComplete ? 'btn hidden' : 'btn resume'}>{getButtonText()}</button>
