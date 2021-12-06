@@ -85,15 +85,18 @@ function App() {
 
   return (
     <div className="App">
-      <div className="timer">
+      <div className="timer" data-testid="timer">
         {time}
         <p className="unit">sec</p>
       </div>
       <input type="number" value={timer} onChange={(e) => onChange(e)} className="input" placeholder="Enter timer"/>
       <div className="btns">
-        <button onClick={start} className={isComplete ? 'btn start': 'btn hidden'}>Start</button>
-        <button onClick={toggle} className={isComplete ? 'btn hidden' : 'btn resume'}>{getButtonText()}</button>
-        <button onClick={reset} className={isComplete ? 'btn hidden' : 'btn'}>Reset</button>
+        {isComplete ? <button onClick={start} className='btn start'>Start</button> : 
+        <>
+          <button onClick={toggle} className='btn resume'>{getButtonText()}</button>
+          <button onClick={reset} className='btn'>Reset</button>
+        </> }
+        
       </div>
       
     </div>
